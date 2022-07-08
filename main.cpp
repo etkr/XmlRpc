@@ -13,7 +13,7 @@ namespace math_api
         client.call(server_url, "sample.sumAndDifference", "ii", &result, x, y);
 
         xmlrpc_c::value_struct value(result);
-        std::map<std::string, xmlrpc_c::value> map = (std::map<std::string, xmlrpc_c::value>)value;
+        auto map = (std::map<std::string, xmlrpc_c::value>)value;
 
         xmlrpc_c::value_int sum(map["sum"]);
         xmlrpc_c::value_int diff(map["difference"]);
