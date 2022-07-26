@@ -4,21 +4,21 @@
 
 namespace math_api
 {
-    static void get_sum_and_difference(const int x, const int y)
+    static void get_sum_and_difference()
     {
-        std::string const server_url{"http://xmlrpc-c.sourceforge.net/api/sample.php"};
+        std::string const server_url("http://127.0.0.1:40474/RPC2");
 
         xmlrpc_c::clientSimple client;
         xmlrpc_c::value result;
-        client.call(server_url, "sample.sumAndDifference", "ii", &result, x, y);
+        client.call(server_url, "notify.log", "ss", &result, "TESTc++", "Open");
 
-        xmlrpc_c::value_struct value(result);
-        auto map = (std::map<std::string, xmlrpc_c::value>)value;
+        // xmlrpc_c::value_struct value(result);
+        // std::map<std::string, xmlrpc_c::value> map = (std::map<std::string, xmlrpc_c::value>)value;
 
-        xmlrpc_c::value_int sum(map["sum"]);
-        xmlrpc_c::value_int diff(map["difference"]);
+        // xmlrpc_c::value_int sum(map["sum"]);
+        // xmlrpc_c::value_int diff(map["difference"]);
 
-        std::cout << "Sum: " << sum << ", Difference: " << diff << std::endl;
+        // std::cout << "Sum: " << sum << ", Difference: " << diff << std::endl;
     }
 }
 
@@ -26,12 +26,12 @@ int main(int argc, char **argv)
 {
     try
     {
-        math_api::get_sum_and_difference(5, 7);
+        math_api::get_sum_and_difference();
     }
     catch (xmlrpc_c::fault &fault)
     {
         std::cerr << argv[0] << ": XML-RPC fault #" << fault.getCode() << ": " << fault.getDescription() << std::endl;
-        exit(1);
+        // exit(1);
     }
     return 0;
 }
